@@ -4,13 +4,13 @@
   * @author  fire
   * @version V2.0
   * @date    2018-xx-xx
-  * @brief   lcd应用函数接口
+  * @brief   lcd脫娄脫脙潞炉脢媒陆脫驴脷
   ******************************************************************
   * @attention
   *
-  * 实验平台:野火  i.MXRT1052开发板 
-  * 论坛    :http://www.firebbs.cn
-  * 淘宝    :https://fire-stm32.taobao.com
+  * 脢碌脩茅脝陆脤篓:脪掳禄冒  i.MXRT1052驴陋路垄掳氓 
+  * 脗脹脤鲁    :http://www.firebbs.cn
+  * 脤脭卤娄    :https://fire-stm32.taobao.com
   *
   ******************************************************************
   */
@@ -27,31 +27,31 @@
 
 
 /*******************************************************************************
- * 变量
+ * 卤盲脕驴
  ******************************************************************************/
 
-/* 帧中断标志 */
+/* 脰隆脰脨露脧卤锚脰戮 */
 volatile bool s_frameDone = false;
 
-/* 帧数计数器，使能帧中断才有效 */
+/* 脰隆脢媒录脝脢媒脝梅拢卢脢鹿脛脺脰隆脰脨露脧虏脜脫脨脨搂 */
 __IO uint32_t s_frame_count = 0;
 
-/* 显存 */
+/* 脧脭麓忙 */
 AT_NONCACHEABLE_SECTION_ALIGN( pixel_t s_psBufferLcd[2][LCD_PIXEL_HEIGHT][LCD_PIXEL_WIDTH], FRAME_BUFFER_ALIGN);
 
-/*用于存储当前选择的字体格式*/
+/*脫脙脫脷麓忙麓垄碌卤脟掳脩隆脭帽碌脛脳脰脤氓赂帽脢陆*/
 static sFONT *LCD_Currentfonts = &Font24x48;
-/* 用于存储当前字体颜色和字体背景颜色的变量*/
+/* 脫脙脫脷麓忙麓垄碌卤脟掳脳脰脤氓脩脮脡芦潞脥脳脰脤氓卤鲁戮掳脩脮脡芦碌脛卤盲脕驴*/
 static pixel_t CurrentTextColor   = CL_WHITE;
 static pixel_t CurrentBackColor   = CL_BLACK;
 
-/* 指向当前的显存，由于是地址，所以用32位变量 */
+/* 脰赂脧貌碌卤脟掳碌脛脧脭麓忙拢卢脫脡脫脷脢脟碌脴脰路拢卢脣霉脪脭脫脙32脦禄卤盲脕驴 */
 static uint32_t CurrentFrameBuffer = (uint32_t)s_psBufferLcd[0];
 
 /*******************************************************************************
- * 宏
+ * 潞锚
  ******************************************************************************/
-/* 所有引脚均使用同样的PAD配置 */
+/* 脣霉脫脨脪媒陆脜戮霉脢鹿脫脙脥卢脩霉碌脛PAD脜盲脰脙 */
 #define LCD_PAD_CONFIG_DATA            (SRE_1_FAST_SLEW_RATE| \
                                         DSE_6_R0_6| \
                                         SPEED_3_MAX_200MHz| \
@@ -60,18 +60,18 @@ static uint32_t CurrentFrameBuffer = (uint32_t)s_psBufferLcd[0];
                                         PUE_0_KEEPER_SELECTED| \
                                         PUS_0_100K_OHM_PULL_DOWN| \
                                         HYS_0_HYSTERESIS_DISABLED)   
-    /* 配置说明 : */
-    /* 转换速率: 转换速率快
-        驱动强度: R0/6 
-        带宽配置 : max(200MHz)
-        开漏配置: 关闭 
-        拉/保持器配置: 使能
-        拉/保持器选择: 保持器
-        上拉/下拉选择: 100K欧姆下拉(选择了保持器此配置无效)
-        滞回器配置: 禁止 */
+    /* 脜盲脰脙脣碌脙梅 : */
+    /* 脳陋禄禄脣脵脗脢: 脳陋禄禄脣脵脗脢驴矛
+        脟媒露炉脟驴露脠: R0/6 
+        麓酶驴铆脜盲脰脙 : max(200MHz)
+        驴陋脗漏脜盲脰脙: 鹿脴卤脮 
+        脌颅/卤拢鲁脰脝梅脜盲脰脙: 脢鹿脛脺
+        脌颅/卤拢鲁脰脝梅脩隆脭帽: 卤拢鲁脰脝梅
+        脡脧脌颅/脧脗脌颅脩隆脭帽: 100K脜路脛路脧脗脌颅(脩隆脭帽脕脣卤拢鲁脰脝梅麓脣脜盲脰脙脦脼脨搂)
+        脰脥禄脴脝梅脜盲脰脙: 陆没脰鹿 */
         
 /*******************************************************************************
- * 声明
+ * 脡霉脙梅
  ******************************************************************************/
 static void LCD_IOMUXC_MUX_Config(void);
 static void LCD_IOMUXC_PAD_Config(void);
@@ -79,20 +79,20 @@ static void LCD_ELCDIF_Config(void);
 
 
 /**
-* @brief  初始化LCD相关IOMUXC的MUX复用配置
-* @param  无
-* @retval 无
+* @brief  鲁玫脢录禄炉LCD脧脿鹿脴IOMUXC碌脛MUX赂麓脫脙脜盲脰脙
+* @param  脦脼
+* @retval 脦脼
 */
 static void LCD_IOMUXC_MUX_Config(void)
 {
-    /* 所有引脚均不开启SION功能 */
-    /* 时序控制信号线 */
+    /* 脣霉脫脨脪媒陆脜戮霉虏禄驴陋脝么SION鹿娄脛脺 */
+    /* 脢卤脨貌驴脴脰脝脨脜潞脜脧脽 */
     IOMUXC_SetPinMux(IOMUXC_GPIO_B0_00_LCD_CLK, 0U);                                    
     IOMUXC_SetPinMux(IOMUXC_GPIO_B0_01_LCD_ENABLE, 0U);                                    
     IOMUXC_SetPinMux(IOMUXC_GPIO_B0_02_LCD_HSYNC, 0U);                                    
     IOMUXC_SetPinMux(IOMUXC_GPIO_B0_03_LCD_VSYNC, 0U);
   
-    /* RGB565数据信号线，
+    /* RGB565脢媒戮脻脨脜潞脜脧脽拢卢
      DATA0~DATA4:B3~B7
      DATA5~DATA10:G2~G7
      DATA11~DATA15:R3~R7 */
@@ -113,7 +113,7 @@ static void LCD_IOMUXC_MUX_Config(void)
     IOMUXC_SetPinMux(IOMUXC_GPIO_B1_02_LCD_DATA14, 0U);                                    
     IOMUXC_SetPinMux(IOMUXC_GPIO_B1_03_LCD_DATA15, 0U); 
 
-		/* 若使用24位数据信号线需要初始化其余数据信号线 */
+		/* 脠么脢鹿脫脙24脦禄脢媒戮脻脨脜潞脜脧脽脨猫脪陋鲁玫脢录禄炉脝盲脫脿脢媒戮脻脨脜潞脜脧脽 */
 #if LCD_BUS_24_BIT
 		IOMUXC_SetPinMux(IOMUXC_GPIO_B1_04_LCD_DATA16, 0U);                                    
     IOMUXC_SetPinMux(IOMUXC_GPIO_B1_05_LCD_DATA17, 0U);                                    
@@ -125,26 +125,26 @@ static void LCD_IOMUXC_MUX_Config(void)
     IOMUXC_SetPinMux(IOMUXC_GPIO_B1_11_LCD_DATA23, 0U);                                    
 #endif 
 		
-    /* LCD_BL背光控制信号线 */
+    /* LCD_BL卤鲁鹿芒驴脴脰脝脨脜潞脜脧脽 */
     IOMUXC_SetPinMux(LCD_BL_IOMUXC, 0U); 
 }
 
 
 /**
-* @brief  初始化LCD相关IOMUXC的PAD属性配置
-* @param  无
-* @retval 无
+* @brief  鲁玫脢录禄炉LCD脧脿鹿脴IOMUXC碌脛PAD脢么脨脭脜盲脰脙
+* @param  脦脼
+* @retval 脦脼
 */
 static void LCD_IOMUXC_PAD_Config(void)
 {  
-    /* 所有引脚均使用同样的PAD配置 */
-    /* 时序控制信号线 */
+    /* 脣霉脫脨脪媒陆脜戮霉脢鹿脫脙脥卢脩霉碌脛PAD脜盲脰脙 */
+    /* 脢卤脨貌驴脴脰脝脨脜潞脜脧脽 */
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_00_LCD_CLK,LCD_PAD_CONFIG_DATA);
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_01_LCD_ENABLE, LCD_PAD_CONFIG_DATA);
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_02_LCD_HSYNC, LCD_PAD_CONFIG_DATA);  
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_03_LCD_VSYNC, LCD_PAD_CONFIG_DATA); 
 
-    /* RGB565数据信号线，
+    /* RGB565脢媒戮脻脨脜潞脜脧脽拢卢
      DATA0~DATA4:B3~B7
      DATA5~DATA10:G2~G7
      DATA11~DATA15:R3~R7 */
@@ -165,7 +165,7 @@ static void LCD_IOMUXC_PAD_Config(void)
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_02_LCD_DATA14, LCD_PAD_CONFIG_DATA); 
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_03_LCD_DATA15, LCD_PAD_CONFIG_DATA); 
 		
-		/* 若使用24位数据信号线需要初始化其余数据信号线 */
+		/* 脠么脢鹿脫脙24脦禄脢媒戮脻脨脜潞脜脧脽脨猫脪陋鲁玫脢录禄炉脝盲脫脿脢媒戮脻脨脜潞脜脧脽 */
 #if LCD_BUS_24_BIT
 		IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_04_LCD_DATA16, LCD_PAD_CONFIG_DATA);                                    
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_05_LCD_DATA17, LCD_PAD_CONFIG_DATA);                                    
@@ -176,14 +176,14 @@ static void LCD_IOMUXC_PAD_Config(void)
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_10_LCD_DATA22, LCD_PAD_CONFIG_DATA);                                    
     IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_11_LCD_DATA23, LCD_PAD_CONFIG_DATA);                                    
 #endif     
-    /* LCD_BL背光控制信号线 */
+    /* LCD_BL卤鲁鹿芒驴脴脰脝脨脜潞脜脧脽 */
     IOMUXC_SetPinConfig(LCD_BL_IOMUXC, LCD_PAD_CONFIG_DATA);
 }
 
 /**
-* @brief  初始化ELCDIF外设
-* @param  无
-* @retval 无
+* @brief  鲁玫脢录禄炉ELCDIF脥芒脡猫
+* @param  脦脼
+* @retval 脦脼
 */
 static void LCD_ELCDIF_Config(void)
 {	
@@ -207,25 +207,25 @@ static void LCD_ELCDIF_Config(void)
 }
 
 /**
-* @brief  初始化ELCDIF使用的时钟
-* @param  无
-* @retval 无
+* @brief  鲁玫脢录禄炉ELCDIF脢鹿脫脙碌脛脢卤脰脫
+* @param  脦脼
+* @retval 脦脼
 */
 void LCD_InitClock(void)
 {
     /*
-     * 要把帧率设置成60Hz，所以像素时钟频率为:
-     * 水平像素时钟个数：(LCD_IMG_WIDTH + LCD_HSW + LCD_HFP + LCD_HBP ) 
-     * 垂直行数：(LCD_IMG_HEIGHT + LCD_VSW + LCD_VFP + LCD_VBP)
+     * 脪陋掳脩脰隆脗脢脡猫脰脙鲁脡60Hz拢卢脣霉脪脭脧帽脣脴脢卤脰脫脝碌脗脢脦陋:
+     * 脣庐脝陆脧帽脣脴脢卤脰脫赂枚脢媒拢潞(LCD_IMG_WIDTH + LCD_HSW + LCD_HFP + LCD_HBP ) 
+     * 麓鹿脰卤脨脨脢媒拢潞(LCD_IMG_HEIGHT + LCD_VSW + LCD_VFP + LCD_VBP)
      * 
-     * 像素时钟频率：(800 + 1 + 22 + 46) * (480 + 1 + 22 + 23) * 60 = 27.4M.
-     * 本例子设置 LCDIF 像素时钟频率为 27M.
-     *	 LCD的帧率以实测的为准。
+     * 脧帽脣脴脢卤脰脫脝碌脗脢拢潞(800 + 1 + 22 + 46) * (480 + 1 + 22 + 23) * 60 = 27.4M.
+     * 卤戮脌媒脳脫脡猫脰脙 LCDIF 脧帽脣脴脢卤脰脫脝碌脗脢脦陋 27M.
+     *	 LCD碌脛脰隆脗脢脪脭脢碌虏芒碌脛脦陋脳录隆拢
      */
 
     /*
-     * 初始化 Vedio PLL，即PLL5
-     * Video PLL 输出频率为 
+     * 鲁玫脢录禄炉 Vedio PLL拢卢录麓PLL5
+     * Video PLL 脢盲鲁枚脝碌脗脢脦陋 
      * OSC24M * (loopDivider + (denominator / numerator)) / postDivider = 108MHz.
      */
     clock_video_pll_config_t config = {
@@ -242,24 +242,24 @@ void LCD_InitClock(void)
      * 100 derive clock from PLL2 PFD1
      * 101 derive clock from PLL3 PFD1
      */
-    /* 选择为vedio PLL，即PLL5 */
+    /* 脩隆脭帽脦陋vedio PLL拢卢录麓PLL5 */
     CLOCK_SetMux(kCLOCK_LcdifPreMux, 2);
 
-    /* 设置预分频 */  
+    /* 脡猫脰脙脭陇路脰脝碌 */  
     CLOCK_SetDiv(kCLOCK_LcdifPreDiv, 1);
 
-		/* 设置分频 */  
+		/* 脡猫脰脙路脰脝碌 */  
     CLOCK_SetDiv(kCLOCK_LcdifDiv, 1);
 }
 
 /**
-* @brief  初始化背光引脚并点亮
-* @param  无
-* @retval 无
+* @brief  鲁玫脢录禄炉卤鲁鹿芒脪媒陆脜虏垄碌茫脕脕
+* @param  脦脼
+* @retval 脦脼
 */
 void LCD_BackLight_ON(void)
 {    
-    /* 背光，高电平点亮 */
+    /* 卤鲁鹿芒拢卢赂脽碌莽脝陆碌茫脕脕 */
     gpio_pin_config_t config = {
       kGPIO_DigitalOutput, 
       1,
@@ -272,35 +272,35 @@ void LCD_BackLight_ON(void)
 
 
 /**
-* @brief  初始化液晶屏
-* @param  enableInterrupt ：是否使能中断
-*		@arg LCD_INTERRUPT_DISABLE 不使能
-*		@arg LCD_INTERRUPT_ENABLE  使能
-* @retval 无
+* @brief  鲁玫脢录禄炉脪潞戮搂脝脕
+* @param  enableInterrupt 拢潞脢脟路帽脢鹿脛脺脰脨露脧
+*		@arg LCD_INTERRUPT_DISABLE 虏禄脢鹿脛脺
+*		@arg LCD_INTERRUPT_ENABLE  脢鹿脛脺
+* @retval 脦脼
 */
 void LCD_Init(bool enableInterrupt)
 {
 #if LCD_RGB_888	
 	/* 
-  * 本代码配置LCD read_qos 及 write_qos 寄存器，支持配置值的范围为0x0-0xF，
-  * 此处设置qos为0xF最大值。
-	*	Qos：
+  * 卤戮麓煤脗毛脜盲脰脙LCD read_qos 录掳 write_qos 录脛麓忙脝梅拢卢脰搂鲁脰脜盲脰脙脰碌碌脛路露脦搂脦陋0x0-0xF拢卢
+  * 麓脣麓娄脡猫脰脙qos脦陋0xF脳卯麓贸脰碌隆拢
+	*	Qos拢潞
   * The Quality of Service (QoS) tidemark value represents the maximum
 	*	permitted number of active transactions before the QoS mechanism is
-	*	activated。
-	*  详细说明见
-	* 《IMXRT1050RM》（参考手册）的章节《Network Interconnect Bus System (NIC-301)》
-	* 及《CoreLink  Network Interconnect (NIC-301)Technical Reference Manua r2p3》
+	*	activated隆拢
+	*  脧锚脧赂脣碌脙梅录没
+	* 隆露IMXRT1050RM隆路拢篓虏脦驴录脢脰虏谩拢漏碌脛脮脗陆脷隆露Network Interconnect Bus System (NIC-301)隆路
+	* 录掳隆露CoreLink  Network Interconnect (NIC-301)Technical Reference Manua r2p3隆路
 	* @note 
-  *  简单来说就是提高LCD使用RT1052内部总线的带宽数量、能力
-	*  对于800*480@XRGB8888@60Hz的显示必须要这样配置，
-  *  对于800*480@RGB565@60Hz的显示不需要配置，保持默认即可（推荐）
+  *  录貌碌楼脌麓脣碌戮脥脢脟脤谩赂脽LCD脢鹿脫脙RT1052脛脷虏驴脳脺脧脽碌脛麓酶驴铆脢媒脕驴隆垄脛脺脕娄
+	*  露脭脫脷800*480@XRGB8888@60Hz碌脛脧脭脢戮卤脴脨毛脪陋脮芒脩霉脜盲脰脙拢卢
+  *  露脭脫脷800*480@RGB565@60Hz碌脛脧脭脢戮虏禄脨猫脪陋脜盲脰脙拢卢卤拢鲁脰脛卢脠脧录麓驴脡拢篓脥脝录枚拢漏
 	*/
   *((uint32_t *)0x41044100) = 0x0000000f;
 	*((uint32_t *)0x41044104) = 0x0000000f;
 #endif
 	
-	/* 初始化eLCDIF引脚、时钟 、模式、背光以及中断*/
+	/* 鲁玫脢录禄炉eLCDIF脪媒陆脜隆垄脢卤脰脫 隆垄脛拢脢陆隆垄卤鲁鹿芒脪脭录掳脰脨露脧*/
   LCD_IOMUXC_MUX_Config();
   LCD_IOMUXC_PAD_Config();
   LCD_InitClock();
@@ -313,25 +313,25 @@ void LCD_Init(bool enableInterrupt)
   }
 }
 
-/***************************中断相关******************************/
+/***************************脰脨露脧脧脿鹿脴******************************/
 /**
-* @brief  配置ELCDIF中断
-* @param  无
-* @retval 无
+* @brief  脜盲脰脙ELCDIF脰脨露脧
+* @param  脦脼
+* @retval 脦脼
 */
 void LCD_InterruptConfig(void)
 {
-  /* 使能中断 */
+  /* 脢鹿脛脺脰脨露脧 */
   EnableIRQ(LCDIF_IRQn);
    
-  /* 配置ELCDIF为CurFrameDoneInterrupt中断 */
+  /* 脜盲脰脙ELCDIF脦陋CurFrameDoneInterrupt脰脨露脧 */
   ELCDIF_EnableInterrupts(LCDIF, kELCDIF_CurFrameDoneInterruptEnable);
 }
 
 /**
-* @brief  ELCDIF中断服务函数
-* @param  无
-* @retval 无
+* @brief  ELCDIF脰脨露脧路镁脦帽潞炉脢媒
+* @param  脦脼
+* @retval 脦脼
 */
 void LCDIF_IRQHandler(void)
 {
@@ -343,31 +343,31 @@ void LCDIF_IRQHandler(void)
 
    if (intStatus & kELCDIF_CurFrameDone)
     {
-				/* 当前帧处理完成标志 */
+				/* 碌卤脟掳脰隆麓娄脌铆脥锚鲁脡卤锚脰戮 */
         s_frameDone = true;
-				/* 帧计数器 */
+				/* 脰隆录脝脢媒脝梅 */
 				s_frame_count++;
 
     }
 
-    /* 以下部分是为 ARM 的勘误838869添加的, 
-       该错误影响 Cortex-M4, Cortex-M4F内核，       
-       立即存储覆盖重叠异常，导致返回操作可能会指向错误的中断
-        CM7不受影响，此处保留该代码
+    /* 脪脭脧脗虏驴路脰脢脟脦陋 ARM 碌脛驴卤脦贸838869脤铆录脫碌脛, 
+       赂脙麓铆脦贸脫掳脧矛 Cortex-M4, Cortex-M4F脛脷潞脣拢卢       
+       脕垄录麓麓忙麓垄赂虏赂脟脰脴碌镁脪矛鲁拢拢卢碌录脰脗路碌禄脴虏脵脳梅驴脡脛脺禄谩脰赂脧貌麓铆脦贸碌脛脰脨露脧
+        CM7虏禄脢脺脫掳脧矛拢卢麓脣麓娄卤拢脕么赂脙麓煤脗毛
     */  
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
 }
 
-/***************************显示应用相关******************************/
+/***************************脧脭脢戮脫娄脫脙脧脿鹿脴******************************/
 
-/***************************显示字符相关******************************/
+/***************************脧脭脢戮脳脰路没脧脿鹿脴******************************/
 
 /**
-  * @brief  设置字体的颜色及字体的背景颜色
-  * @param  TextColor: 字体颜色
-  * @param  BackColor: 字体的背景颜色
+  * @brief  脡猫脰脙脳脰脤氓碌脛脩脮脡芦录掳脳脰脤氓碌脛卤鲁戮掳脩脮脡芦
+  * @param  TextColor: 脳脰脤氓脩脮脡芦
+  * @param  BackColor: 脳脰脤氓碌脛卤鲁戮掳脩脮脡芦
   * @retval None
   */
 void LCD_SetColors(pixel_t TextColor, pixel_t BackColor) 
@@ -377,9 +377,9 @@ void LCD_SetColors(pixel_t TextColor, pixel_t BackColor)
 }
 
 /**
-  * @brief 获取当前设置的字体颜色和字体的背景颜色
-  * @param  TextColor: 指向字体颜色的指针
-  * @param  BackColor: 指向字体背景颜色的指针
+  * @brief 禄帽脠隆碌卤脟掳脡猫脰脙碌脛脳脰脤氓脩脮脡芦潞脥脳脰脤氓碌脛卤鲁戮掳脩脮脡芦
+  * @param  TextColor: 脰赂脧貌脳脰脤氓脩脮脡芦碌脛脰赂脮毛
+  * @param  BackColor: 脰赂脧貌脳脰脤氓卤鲁戮掳脩脮脡芦碌脛脰赂脮毛
   * @retval None
   */
 void LCD_GetColors(pixel_t *TextColor, pixel_t *BackColor)
@@ -389,8 +389,8 @@ void LCD_GetColors(pixel_t *TextColor, pixel_t *BackColor)
 }
 
 /**
-  * @brief  设置字体颜色
-  * @param  Color: 字体颜色
+  * @brief  脡猫脰脙脳脰脤氓脩脮脡芦
+  * @param  Color: 脳脰脤氓脩脮脡芦
   * @retval None
   */
 void LCD_SetTextColor(pixel_t Color)
@@ -399,8 +399,8 @@ void LCD_SetTextColor(pixel_t Color)
 }
 
 /**
-  * @brief  设置字体的背景颜色
-  * @param  Color: 字体的背景颜色
+  * @brief  脡猫脰脙脳脰脤氓碌脛卤鲁戮掳脩脮脡芦
+  * @param  Color: 脳脰脤氓碌脛卤鲁戮掳脩脮脡芦
   * @retval None
   */
 void LCD_SetBackColor(pixel_t Color)
@@ -409,8 +409,8 @@ void LCD_SetBackColor(pixel_t Color)
 }
 
 /**
-  * @brief  设置字体格式(英文)
-  * @param  fonts: 选择要设置的字体格式
+  * @brief  脡猫脰脙脳脰脤氓赂帽脢陆(脫垄脦脛)
+  * @param  fonts: 脩隆脭帽脪陋脡猫脰脙碌脛脳脰脤氓赂帽脢陆
   * @retval None
   */
 void LCD_SetFont(sFONT *fonts)
@@ -419,9 +419,9 @@ void LCD_SetFont(sFONT *fonts)
 }
 
 /**
-  * @brief  获取当前字体格式(英文)
+  * @brief  禄帽脠隆碌卤脟掳脳脰脤氓赂帽脢陆(脫垄脦脛)
   * @param  None.
-  * @retval 当前应用的格式
+  * @retval 碌卤脟掳脫娄脫脙碌脛赂帽脢陆
   */
 sFONT *LCD_GetFont(void)
 {
@@ -430,10 +430,10 @@ sFONT *LCD_GetFont(void)
 
 
 /**
-  * @brief  在显示器上显示一个英文字符
-  * @param  Xpos ：字符的起始X坐标
-  * @param  Ypos ：字符的起始Y坐标
-  * @param  Ascii: 要显示的字符的ASCII码
+  * @brief  脭脷脧脭脢戮脝梅脡脧脧脭脢戮脪禄赂枚脫垄脦脛脳脰路没
+  * @param  Xpos 拢潞脳脰路没碌脛脝冒脢录X脳酶卤锚
+  * @param  Ypos 拢潞脳脰路没碌脛脝冒脢录Y脳酶卤锚
+  * @param  Ascii: 脪陋脧脭脢戮碌脛脳脰路没碌脛ASCII脗毛
   * @retval None
   */
 void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, char Ascii)
@@ -447,70 +447,70 @@ void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, char Ascii)
   uint32_t yBufferPos = 0;
   uint32_t xPixelPos = 0;
   
-  /*yBufferPos表示当前行的显存偏移位置*/
+  /*yBufferPos卤铆脢戮碌卤脟掳脨脨碌脛脧脭麓忙脝芦脪脝脦禄脰脙*/
   yBufferPos = Ypos*LCD_PIXEL_WIDTH*LCD_BPP;
   
-  /*xpixelPos表示部分像素点位置
-    LCD_BPP*xPixelPos + yBufferPos 就是当前像素点的显存位置
+  /*xpixelPos卤铆脢戮虏驴路脰脧帽脣脴碌茫脦禄脰脙
+    LCD_BPP*xPixelPos + yBufferPos 戮脥脢脟碌卤脟掳脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙
   */
   xPixelPos += Xpos;
 	
-	//对ascii码表偏移（字模表不包含ASCII表的前32个非图形符号）
+	//露脭ascii脗毛卤铆脝芦脪脝拢篓脳脰脛拢卤铆虏禄掳眉潞卢ASCII卤铆碌脛脟掳32赂枚路脟脥录脨脦路没潞脜拢漏
 	relativePositon = Ascii - ' ';
 	
-	//每个字模的字节数
+	//脙驴赂枚脳脰脛拢碌脛脳脰陆脷脢媒
 	fontLength = (LCD_Currentfonts->Width*LCD_Currentfonts->Height)/8;
 		
-	//字模首地址
-	/*ascii码表偏移值乘以每个字模的字节数，求出字模的偏移位置*/
+	//脳脰脛拢脢脳碌脴脰路
+	/*ascii脗毛卤铆脝芦脪脝脰碌鲁脣脪脭脙驴赂枚脳脰脛拢碌脛脳脰陆脷脢媒拢卢脟贸鲁枚脳脰脛拢碌脛脝芦脪脝脦禄脰脙*/
 	pfont = (uint8_t *)&LCD_Currentfonts->table[relativePositon * fontLength];
 	
-  //每个字模有LCD_Currentfonts->Height行，遍历每一行
+  //脙驴赂枚脳脰脛拢脫脨LCD_Currentfonts->Height脨脨拢卢卤茅脌煤脙驴脪禄脨脨
   for ( page = 0; page < LCD_Currentfonts->Height; page++ )
 	{    
-    //每个字模有LCD_Currentfonts->Width/8 个字节，遍历每个字节
+    //脙驴赂枚脳脰脛拢脫脨LCD_Currentfonts->Width/8 赂枚脳脰陆脷拢卢卤茅脌煤脙驴赂枚脳脰陆脷
     for ( column = 0; column < LCD_Currentfonts->Width/8; column++ ) 
 		{	
       uint8_t bitCount = 0;
 
-      //每个字节有8个数据位，遍历每个数据位
+      //脙驴赂枚脳脰陆脷脫脨8赂枚脢媒戮脻脦禄拢卢卤茅脌煤脙驴赂枚脢媒戮脻脦禄
       for(bitCount=0; bitCount<8; bitCount++)
       {
         if(*pfont & (0x80>>bitCount))
         {
-           //字体色
+           //脳脰脤氓脡芦
            *(__IO pixel_t*)(CurrentFrameBuffer + (LCD_BPP*xPixelPos) + yBufferPos) = CurrentTextColor;        
         }
         else
         {
-          //背景色
+          //卤鲁戮掳脡芦
           *(__IO pixel_t*)(CurrentFrameBuffer + (LCD_BPP*xPixelPos) + yBufferPos) = CurrentBackColor; 
         }
-        /*指向当前行的下一个点*/
+        /*脰赂脧貌碌卤脟掳脨脨碌脛脧脗脪禄赂枚碌茫*/
         xPixelPos++;		
       }
       
-      /* 指向字模数据的一下个字节 */
+      /* 脰赂脧貌脳脰脛拢脢媒戮脻碌脛脪禄脧脗赂枚脳脰陆脷 */
       pfont++;
     }      
-    /*显示完一行*/
-    /*指向字符显示矩阵下一行的第一个像素点*/
+    /*脧脭脢戮脥锚脪禄脨脨*/
+    /*脰赂脧貌脳脰路没脧脭脢戮戮脴脮贸脧脗脪禄脨脨碌脛碌脷脪禄赂枚脧帽脣脴碌茫*/
     xPixelPos += (LCD_PIXEL_WIDTH - LCD_Currentfonts->Width);		
   }
 }
 
 /**
- * @brief  在显示器上显示中英文字符串,超出液晶宽度时会自动换行。
- * @param  Xpos ：字符的起始X坐标
- * @param  Ypos ：字符的起始Y坐标
- * @param  pStr ：要显示的字符串的首地址
- * @retval 无
+ * @brief  脭脷脧脭脢戮脝梅脡脧脧脭脢戮脰脨脫垄脦脛脳脰路没麓庐,鲁卢鲁枚脪潞戮搂驴铆露脠脢卤禄谩脳脭露炉禄禄脨脨隆拢
+ * @param  Xpos 拢潞脳脰路没碌脛脝冒脢录X脳酶卤锚
+ * @param  Ypos 拢潞脳脰路没碌脛脝冒脢录Y脳酶卤锚
+ * @param  pStr 拢潞脪陋脧脭脢戮碌脛脳脰路没麓庐碌脛脢脳碌脴脰路
+ * @retval 脦脼
  */
 void LCD_DispString(uint16_t Xpos, uint16_t Ypos, const uint8_t * pStr )
 {
 	while( * pStr != '\0' )
 	{	
-    /*自动换行*/
+    /*脳脭露炉禄禄脨脨*/
     if ( ( Xpos + LCD_Currentfonts->Width ) > LCD_PIXEL_WIDTH )
     {
       Xpos = 0;
@@ -523,7 +523,7 @@ void LCD_DispString(uint16_t Xpos, uint16_t Ypos, const uint8_t * pStr )
       Ypos = 0;
     }			
         
-    /* 显示单个字符 */
+    /* 脧脭脢戮碌楼赂枚脳脰路没 */
     LCD_DisplayChar(Xpos,Ypos,*pStr);
     
     Xpos += LCD_Currentfonts->Width;
@@ -533,65 +533,65 @@ void LCD_DispString(uint16_t Xpos, uint16_t Ypos, const uint8_t * pStr )
 } 
 
 /**
-  * @brief  显示字符串(英文)
-  * @param  Line: 根据当前字体而变的行号
-  *     @arg Line(1),Line(2)等
-  * @param  *ptr: 要显示的字符串
+  * @brief  脧脭脢戮脳脰路没麓庐(脫垄脦脛)
+  * @param  Line: 赂霉戮脻碌卤脟掳脳脰脤氓露酶卤盲碌脛脨脨潞脜
+  *     @arg Line(1),Line(2)碌脠
+  * @param  *ptr: 脪陋脧脭脢戮碌脛脳脰路没麓庐
   * @retval None
   */
 void LCD_DisplayStringLine(uint16_t Line, uint8_t *ptr)
 {  
   uint16_t refcolumn = 0;
-  /* 循环显示字符，直至遇到字符串结束符
-    或直到单行显示不下字符
+  /* 脩颅禄路脧脭脢戮脳脰路没拢卢脰卤脰脕脫枚碌陆脳脰路没麓庐陆谩脢酶路没
+    禄貌脰卤碌陆碌楼脨脨脧脭脢戮虏禄脧脗脳脰路没
   */
   while ((refcolumn < LCD_PIXEL_WIDTH) && ((*ptr != 0) & 
     ((refcolumn + LCD_Currentfonts->Width) <= LCD_PIXEL_WIDTH)))
   {
-    /* 显示单个字符 */
+    /* 脧脭脢戮碌楼赂枚脳脰路没 */
     LCD_DisplayChar(refcolumn,Line , *ptr);
-    /* 偏移字符显示位置 */
+    /* 脝芦脪脝脳脰路没脧脭脢戮脦禄脰脙 */
     refcolumn += LCD_Currentfonts->Width;
-    /* 指向下一个字符 */
+    /* 脰赂脧貌脧脗脪禄赂枚脳脰路没 */
     ptr++;
   }
 }
 
 /**
-  * @brief  清除指定行的字符
-  * @param  Line: 要清除的行,注意LINE宏是根据当前字体而变的
+  * @brief  脟氓鲁媒脰赂露篓脨脨碌脛脳脰路没
+  * @param  Line: 脪陋脟氓鲁媒碌脛脨脨,脳垄脪芒LINE潞锚脢脟赂霉戮脻碌卤脟掳脳脰脤氓露酶卤盲碌脛
   *     @arg LINE(1),LINE(2)
   * @retval None
   */
 void LCD_ClearLine(uint16_t Line)
 {
   uint16_t refcolumn = 0;
-  /* 循环显示至屏幕最右侧 */
+  /* 脩颅禄路脧脭脢戮脰脕脝脕脛禄脳卯脫脪虏脿 */
   while ((refcolumn < LCD_PIXEL_WIDTH) && 
     (((refcolumn + LCD_Currentfonts->Width)& 0xFFFF) >= LCD_Currentfonts->Width))
   {
-    /* 显示空格（相当于清除的效果） */
+    /* 脧脭脢戮驴脮赂帽拢篓脧脿碌卤脫脷脟氓鲁媒碌脛脨搂鹿没拢漏 */
     LCD_DisplayChar(refcolumn, Line, ' ');
-    /* 偏移字符显示位置 */
+    /* 脝芦脪脝脳脰路没脧脭脢戮脦禄脰脙 */
     refcolumn += LCD_Currentfonts->Width;
   }
 }
 
 /**
-  * @brief  设置显示坐标
-  * @param  Xpos: x坐标
-  * @param  Ypos: y坐标
-  * @retval 显存的地址
+  * @brief  脡猫脰脙脧脭脢戮脳酶卤锚
+  * @param  Xpos: x脳酶卤锚
+  * @param  Ypos: y脳酶卤锚
+  * @retval 脧脭麓忙碌脛碌脴脰路
   */
 uint32_t LCD_SetCursor(uint16_t Xpos, uint16_t Ypos)
 {  
   return CurrentFrameBuffer + LCD_BPP*(Xpos + (LCD_PIXEL_WIDTH*Ypos));
 }
 
-/***************************显示图形相关******************************/
+/***************************脧脭脢戮脥录脨脦脧脿鹿脴******************************/
 /**
-  * @brief 选择当前要操作的显存区域
-  * @param  index: 0或1
+  * @brief 脩隆脭帽碌卤脟掳脪陋虏脵脳梅碌脛脧脭麓忙脟酶脫貌
+  * @param  index: 0禄貌1
   * @retval None
   */
 void LCD_SetFrameBuffer(uint8_t index)
@@ -600,22 +600,22 @@ void LCD_SetFrameBuffer(uint8_t index)
 }
 
 /**
-  * @brief 设置后面要显示的显存区域
-  * @param  index: 0或1
+  * @brief 脡猫脰脙潞贸脙忙脪陋脧脭脢戮碌脛脧脭麓忙脟酶脫貌
+  * @param  index: 0禄貌1
   * @retval None
   */
 void LCD_SetDisplayBuffer(uint8_t index)
 {
-  /* 设置ELCDIF的下一个缓冲区地址 */
+  /* 脡猫脰脙ELCDIF碌脛脧脗脪禄赂枚禄潞鲁氓脟酶碌脴脰路 */
   ELCDIF_SetNextBufferAddr(LCDIF, (uint32_t)s_psBufferLcd[index]);
 
 }
 
 /**
-  * @brief 使用当前颜色在指定的位置绘制一个像素点
-  * @param  Xpos: x坐标
-  * @param  Ypos: y坐标
-  * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
+  * @brief 脢鹿脫脙碌卤脟掳脩脮脡芦脭脷脰赂露篓碌脛脦禄脰脙禄忙脰脝脪禄赂枚脧帽脣脴碌茫
+  * @param  Xpos: x脳酶卤锚
+  * @param  Ypos: y脳酶卤锚
+  * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
   * @retval None
   */
 void PutPixel(uint16_t Xpos, uint16_t Ypos)
@@ -627,42 +627,42 @@ void PutPixel(uint16_t Xpos, uint16_t Ypos)
 }
 
 /**
-  * @brief  以当前背景颜色清除整个屏幕
-  * @param  无
-  * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
-  * @retval 无
+  * @brief  脪脭碌卤脟掳卤鲁戮掳脩脮脡芦脟氓鲁媒脮没赂枚脝脕脛禄
+  * @param  脦脼
+  * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
+  * @retval 脦脼
   */
 void LCD_Clear(uint32_t Color)
 {
-  /* 清除缓冲区内容 */
+  /* 脟氓鲁媒禄潞鲁氓脟酶脛脷脠脻 */
   uint16_t page, column;  
   
-  /* 指向矩形第一个像素点的显存位置 */
+  /* 脰赂脧貌戮脴脨脦碌脷脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
   pixel_t *pRectImage = (pixel_t*)CurrentFrameBuffer ;
   
-  /* 遍历每一行 */
+  /* 卤茅脌煤脙驴脪禄脨脨 */
   for ( page = 0; page < LCD_PIXEL_HEIGHT; page++ )
   {    
-    /* 遍历每一列 */
+    /* 卤茅脌煤脙驴脪禄脕脨 */
     for ( column = 0; column < LCD_PIXEL_WIDTH; column++ ) 
     {	
       *pRectImage = Color;
       
-      /* 指向下一个像素点的显存位置 */
+      /* 脰赂脧貌脧脗脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
       pRectImage++;
     }      
   }
 }
 
 /**
-  * @brief 显示一条直线
-  * @param Xpos: 直线起点的x坐标
-  * @param Ypos: 直线起点的y坐标
-  * @param Length: 直线的长度
-  * @param Direction: 直线的方向，可输入
-      @arg LINE_DIR_HORIZONTAL(水平方向) 
-      @arg LINE_DIR_VERTICAL(垂直方向).
-  * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
+  * @brief 脧脭脢戮脪禄脤玫脰卤脧脽
+  * @param Xpos: 脰卤脧脽脝冒碌茫碌脛x脳酶卤锚
+  * @param Ypos: 脰卤脧脽脝冒碌茫碌脛y脳酶卤锚
+  * @param Length: 脰卤脧脽碌脛鲁陇露脠
+  * @param Direction: 脰卤脧脽碌脛路陆脧貌拢卢驴脡脢盲脠毛
+      @arg LINE_DIR_HORIZONTAL(脣庐脝陆路陆脧貌) 
+      @arg LINE_DIR_VERTICAL(麓鹿脰卤路陆脧貌).
+  * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
   * @retval None
   */
 void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, bool Direction)
@@ -671,19 +671,19 @@ void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, bool Direction)
   
   uint16_t realLength;
   
-  /* 指向直线第一个像素点的显存位置 */
+  /* 脰赂脧貌脰卤脧脽碌脷脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
   pixel_t *pLineImage = (pixel_t*)(CurrentFrameBuffer + LCD_BPP*(Xpos + (LCD_PIXEL_WIDTH*Ypos)));
 
   if(Direction == LINE_DIR_HORIZONTAL)
   {
     realLength = LCD_PIXEL_WIDTH-Xpos-Length > 0 ? Length : LCD_PIXEL_WIDTH - Xpos;
     
-    /* 遍历每一列 */
+    /* 卤茅脌煤脙驴脪禄脕脨 */
     for ( index = 0; index < realLength; index++ ) 
     {
         *pLineImage = CurrentTextColor;
         
-        /* 指向下一个像素点的显存位置 */
+        /* 脰赂脧貌脧脗脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
         pLineImage++;
     }
   }
@@ -691,25 +691,25 @@ void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, bool Direction)
   {
     realLength = LCD_PIXEL_HEIGHT-Ypos-Length > 0 ? Length : LCD_PIXEL_HEIGHT - Ypos;
     
-    /* 遍历每一行 */
+    /* 卤茅脌煤脙驴脪禄脨脨 */
     for ( index = 0; index < realLength; index++ ) 
     {
         *pLineImage = CurrentTextColor;
         
-        /* 指向下一个像素点的显存位置 */
+        /* 脰赂脧貌脧脗脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
         pLineImage += LCD_PIXEL_WIDTH;
     }
   }   
 }
 
 /**
- * @brief  在液晶屏上使用 Bresenham 算法画线段（基于两点） 
- * @param  Xpos1 ：线段的一个端点X坐标
- * @param  Ypos1 ：线段的一个端点Y坐标
- * @param  Xpos2 ：线段的另一个端点X坐标
- * @param  Ypos2 ：线段的另一个端点Y坐标
- * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
- * @retval 无
+ * @brief  脭脷脪潞戮搂脝脕脡脧脢鹿脫脙 Bresenham 脣茫路篓禄颅脧脽露脦拢篓禄霉脫脷脕陆碌茫拢漏 
+ * @param  Xpos1 拢潞脧脽露脦碌脛脪禄赂枚露脣碌茫X脳酶卤锚
+ * @param  Ypos1 拢潞脧脽露脦碌脛脪禄赂枚露脣碌茫Y脳酶卤锚
+ * @param  Xpos2 拢潞脧脽露脦碌脛脕铆脪禄赂枚露脣碌茫X脳酶卤锚
+ * @param  Ypos2 拢潞脧脽露脦碌脛脕铆脪禄赂枚露脣碌茫Y脳酶卤锚
+ * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
+ * @retval 脦脼
  */
 void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t Ypos2 )
 {
@@ -720,7 +720,7 @@ void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t 
 	int32_t lIncrease_X, lIncrease_Y; 	
 	
 	
-	lDelta_X = Xpos2 - Xpos1; //计算坐标增量 
+	lDelta_X = Xpos2 - Xpos1; //录脝脣茫脳酶卤锚脭枚脕驴 
 	lDelta_Y = Ypos2 - Ypos1; 
 	
 	usX_Current = Xpos1; 
@@ -728,10 +728,10 @@ void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t 
 	
 	
 	if ( lDelta_X > 0 ) 
-		lIncrease_X = 1; //设置单步方向 
+		lIncrease_X = 1; //脡猫脰脙碌楼虏陆路陆脧貌 
 	
 	else if ( lDelta_X == 0 ) 
-		lIncrease_X = 0;//垂直线 
+		lIncrease_X = 0;//麓鹿脰卤脧脽 
 	
 	else 
   { 
@@ -744,7 +744,7 @@ void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t 
 		lIncrease_Y = 1; 
 	
 	else if ( lDelta_Y == 0 )
-		lIncrease_Y = 0;//水平线 
+		lIncrease_Y = 0;//脣庐脝陆脧脽 
 	
 	else 
   {
@@ -754,15 +754,15 @@ void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t 
 
 	
 	if (  lDelta_X > lDelta_Y )
-		lDistance = lDelta_X; //选取基本增量坐标轴 
+		lDistance = lDelta_X; //脩隆脠隆禄霉卤戮脭枚脕驴脳酶卤锚脰谩 
 	
 	else 
 		lDistance = lDelta_Y; 
 
 	
-	for ( us = 0; us <= lDistance + 1; us ++ )//画线输出 
+	for ( us = 0; us <= lDistance + 1; us ++ )//禄颅脧脽脢盲鲁枚 
 	{  
-		PutPixel ( usX_Current, usY_Current );//画点 
+		PutPixel ( usX_Current, usY_Current );//禄颅碌茫 
 		
 		lError_X += lDelta_X ; 
 		lError_Y += lDelta_Y ; 
@@ -784,13 +784,13 @@ void LCD_DrawUniLine ( uint16_t Xpos1, uint16_t Ypos1, uint16_t Xpos2, uint16_t 
 }   
 
 /**
-  * @brief  绘制空心矩形
-  * @param  Xpos ：矩形左上角端点X坐标
-  * @param  Ypos ：矩形左上角端点Y坐标
-  * @param  Width ：矩形宽
-  * @param  Height ：矩形高
-  * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
-  * @retval 无
+  * @brief  禄忙脰脝驴脮脨脛戮脴脨脦
+  * @param  Xpos 拢潞戮脴脨脦脳贸脡脧陆脟露脣碌茫X脳酶卤锚
+  * @param  Ypos 拢潞戮脴脨脦脳贸脡脧陆脟露脣碌茫Y脳酶卤锚
+  * @param  Width 拢潞戮脴脨脦驴铆
+  * @param  Height 拢潞戮脴脨脦赂脽
+  * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
+  * @retval 脦脼
   */
 void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {  
@@ -806,13 +806,13 @@ void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 }
 
 /**
-  * @brief  绘制实心矩形
-  * @param  Xpos ：矩形左上角端点X坐标
-  * @param  Ypos ：矩形左上角端点Y坐标
-  * @param  Width ：矩形宽
-  * @param  Height ：矩形高
-  * @note 可使用LCD_SetBackColor、LCD_SetTextColor、LCD_SetColors函数设置颜色
-  * @retval 无
+  * @brief  禄忙脰脝脢碌脨脛戮脴脨脦
+  * @param  Xpos 拢潞戮脴脨脦脳贸脡脧陆脟露脣碌茫X脳酶卤锚
+  * @param  Ypos 拢潞戮脴脨脦脳贸脡脧陆脟露脣碌茫Y脳酶卤锚
+  * @param  Width 拢潞戮脴脨脦驴铆
+  * @param  Height 拢潞戮脴脨脦赂脽
+  * @note 驴脡脢鹿脫脙LCD_SetBackColor隆垄LCD_SetTextColor隆垄LCD_SetColors潞炉脢媒脡猫脰脙脩脮脡芦
+  * @retval 脦脼
   */
 void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
@@ -823,31 +823,31 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   realHeight = LCD_PIXEL_HEIGHT-Ypos-Height > 0 ? Height : LCD_PIXEL_HEIGHT - Ypos;
   realWidth = LCD_PIXEL_WIDTH-Xpos-Width > 0 ? Width : LCD_PIXEL_WIDTH - Xpos;
   
-  /* 指向矩形第一个像素点的显存位置 */
+  /* 脰赂脧貌戮脴脨脦碌脷脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
   pixel_t *pRectImage = (pixel_t*)(CurrentFrameBuffer + LCD_BPP*(Xpos + (LCD_PIXEL_WIDTH*Ypos)));
   
-  /* 遍历每一行 */
+  /* 卤茅脌煤脙驴脪禄脨脨 */
   for ( page = 0; page < realHeight; page++ )
   {    
-    /* 遍历每一列 */
+    /* 卤茅脌煤脙驴脪禄脕脨 */
     for ( column = 0; column < realWidth; column++ ) 
     {	
       *pRectImage = CurrentTextColor;
       
-      /* 指向下一个像素点的显存位置 */
+      /* 脰赂脧貌脧脗脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙 */
       pRectImage++;
     }      
-    /*显示完一行*/
-    /*指向下一行的第一个像素点的显存位置*/
+    /*脧脭脢戮脥锚脪禄脨脨*/
+    /*脰赂脧貌脧脗脪禄脨脨碌脛碌脷脪禄赂枚脧帽脣脴碌茫碌脛脧脭麓忙脦禄脰脙*/
     pRectImage += (LCD_PIXEL_WIDTH - realWidth);		
   }
 }
 
 /**
- * @brief  绘制一个空心圆
- * @param  Xpos: 圆心X坐标
- * @param  Ypos: 圆心Y坐标
- * @param  Radius: 半径
+ * @brief  禄忙脰脝脪禄赂枚驴脮脨脛脭虏
+ * @param  Xpos: 脭虏脨脛X脳酶卤锚
+ * @param  Ypos: 脭虏脨脛Y脳酶卤锚
+ * @param  Radius: 掳毛戮露
  * @retval None
  */
 void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
@@ -870,15 +870,15 @@ void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 }
 
 /**
- * @brief  绘制一个实心圆
- * @param  Xpos: 圆心X坐标
- * @param  Ypos: 圆心Y坐标
- * @param  Radius: 半径
+ * @brief  禄忙脰脝脪禄赂枚脢碌脨脛脭虏
+ * @param  Xpos: 脭虏脨脛X脳酶卤锚
+ * @param  Ypos: 脭虏脨脛Y脳酶卤锚
+ * @param  Radius: 掳毛戮露
  * @retval None
  */
 void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {  
-  /* 绘制实心圆需要增加的操作 */
+  /* 禄忙脰脝脢碌脨脛脭虏脨猫脪陋脭枚录脫碌脛虏脵脳梅 */
    int32_t  D;    /* Decision Variable */
    uint32_t  CurX;/* Current X Value */
    uint32_t  CurY;/* Current Y Value */
